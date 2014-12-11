@@ -96,15 +96,24 @@ class NeuralNet:
                 self.feed(instance[0]) # X's
                 self.backpropagate(instance[1]) # Y's
     
-    def test(self, data, target):
+    def test(self, data, target, verbose):
         accuracy = 0
         for instance in data:
+            # feed the instance
             self.feed(instance[0])
-            predictions = np.array(map(np.vectorize(lambda y: 1 if y>0.5 else 0), self.output_activations))
+            # map the outputs to target values
+            predictions = np.array(map(np.vectorize(lambda y: 1 if y >= 0.5 else 0), self.output_activations))
+            # add 1 if the prediction matches the target value
             accuracy += 1 if (predictions == instance[1]).all() else 0
-            print predictions, instance[1], self.output_activations
+            # debug printing
+            if verbose: print predictions, instance[1], self.output_activations
+        
+        # final accuracy
         print "Prediction Accuracy: ", (float(accuracy) / len(data))*100
-                   
+        
+        return None
+
+
 if __name__ == '__main__':
     ### TEST DATA ###
     data = [(np.array([1,1]).reshape(1,2),np.array([1]).reshape(1,1)),
@@ -115,7 +124,7 @@ if __name__ == '__main__':
 
     nn = NeuralNet(2, 3, 1, .1)
     nn.train(data, None, 1000)
-    nn.test(data, None)
+    nn.test(data, None, False)
     
     #nn.print_activations()
     #nn.print_errors()
