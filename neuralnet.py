@@ -37,11 +37,11 @@ class NeuralNet:
         self.input_activations = np.array(np.append(d,1)).reshape(1,self.num_in)
 
         # input->hidden layer
-        inets = np.dot(self.input_activations,self.input_weights)
+        inets = np.dot(self.input_activations, self.input_weights)
         self.hidden_activations = np.array(map(np.vectorize(self.sigmoid), inets)).reshape(1,self.num_hidden)
         
         # hidden->output layer
-        hnets = np.dot(self.hidden_activations,self.hidden_weights)
+        hnets = np.dot(self.hidden_activations, self.hidden_weights)
         self.output_activations = np.array(map(np.vectorize(self.sigmoid), hnets)).reshape(1,self.num_out)
 
     
@@ -66,9 +66,9 @@ class NeuralNet:
     
     
     def _create_weight_matrix(self, row, col):
-        #m = (.2)*np.random.random((row, col))-.1
+        m = (.2)*np.random.random((row, col))-.1
         #m = np.zeros((row, col))+.1
-        m = (np.arange(row*col).reshape(row,col)+1)*.1
+        #m = (np.arange(row*col).reshape(row,col)+1)*.1
         return m
     
     def print_weights(self):
@@ -92,24 +92,32 @@ class NeuralNet:
     def train(self, data, target, epochs):
         for i in xrange(epochs):
             for instance in data:
-                print instance
+                #print instance
                 self.feed(instance[0]) # X's
                 self.backpropagate(instance[1]) # Y's
-        
+    
+    def test(self, data, target):
+        accuracy = 0
+        for instance in data:
+            self.feed(instance[0])
+            predictions = np.array(map(np.vectorize(lambda y: 1 if y>0.5 else 0), self.output_activations))
+            accuracy += 1 if (predictions == instance[1]).all() else 0
+            print predictions, instance[1], self.output_activations
+        print "Prediction Accuracy: ", (float(accuracy) / len(data))*100
                    
 if __name__ == '__main__':
     ### TEST DATA ###
-    #data = [([1,1],[0,1]),
-    #        ([1,0],[1,1]),
-    #        ([0,1],[1,0]),
-    #        ([0,0],[0,0])]
-    data = [(np.array([1,0]).reshape(1,2),np.array([1,1]).reshape(1,2))]
+    data = [(np.array([1,1]).reshape(1,2),np.array([1]).reshape(1,1)),
+            (np.array([1,0]).reshape(1,2),np.array([1]).reshape(1,1)),
+            (np.array([0,1]).reshape(1,2),np.array([1]).reshape(1,1)),
+            (np.array([0,0]).reshape(1,2),np.array([1]).reshape(1,1))]
     ################
 
-    nn = NeuralNet(2, 3, 2, .1)
-    nn.train(data, None, 100)
+    nn = NeuralNet(2, 3, 1, .1)
+    nn.train(data, None, 1000)
+    nn.test(data, None)
     
-    nn.print_activations()
-    nn.print_errors()
-    nn.print_weights()
+    #nn.print_activations()
+    #nn.print_errors()
+    #nn.print_weights()
 
