@@ -1,8 +1,10 @@
-ann_project
+Artificial Neural Network Project
 ===========
 
 Author: Aaron Cahn
-Data: December 12, 2014
+
+Date: December 12, 2014
+
 Version: 0.2
 
 Notes:
