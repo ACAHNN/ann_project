@@ -2,7 +2,7 @@ import sys
 import math
 import random
 import numpy as np
-
+import cPickle as pickle
 
 
 class NeuralNet:
@@ -157,18 +157,28 @@ class NeuralNet:
 
 if __name__ == '__main__':
     ### TEST DATA ###
-    data = [(np.array([1,1]).reshape(1,2),np.array([0]).reshape(1,1)),
-            (np.array([1,0]).reshape(1,2),np.array([1]).reshape(1,1)),
-            (np.array([0,1]).reshape(1,2),np.array([1]).reshape(1,1)),
-            (np.array([0,0]).reshape(1,2),np.array([0]).reshape(1,1))]
+#    data = [(np.array([1,1]).reshape(1,2),np.array([0]).reshape(1,1)),
+#            (np.array([1,0]).reshape(1,2),np.array([1]).reshape(1,1)),
+#            (np.array([0,1]).reshape(1,2),np.array([1]).reshape(1,1)),
+#            (np.array([0,0]).reshape(1,2),np.array([0]).reshape(1,1))]
 #    data = [(np.array([1,0]).reshape(1,2),np.array([1,1]).reshape(1,2))]
     ################
 
-    nn = NeuralNet(2, [3,2,4,2], 1, .1)
-    nn.train(data, None, 1000)
-    nn.test(data, None, True)
+    f1 = open('data/face_train.pkl', 'rb')
+    f2 = open('data/face_test.pkl', 'rb')
     
-    nn.print_activations()
-    nn.print_errors()
-    nn.print_weights()
+    data1 = pickle.load(f1)
+    data2 = pickle.load(f2)
+    
+    f1.close()
+    f2.close()
+    
+    
+    nn = NeuralNet(361, [120], 1, .1)
+    nn.train(data1, None, 1)
+    nn.test(data2, None, False)
+    
+    #nn.print_activations()
+    #nn.print_errors()
+    #nn.print_weights()
 
