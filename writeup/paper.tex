@@ -1,0 +1,60 @@
+\newcommand{\mysection}[1]{\vspace{-.00cm}\section{#1}\vspace{-.00cm}}
+\newcommand{\mysubsection}[1]{\vspace{-.00cm}\subsection{#1}\vspace{-.00cm}}
+\newcommand{\mysubsubsection}[1]{\vspace{-.00cm}\subsubsection{#1}\vspace{-.00cm}}
+
+%\documentclass{acm_proc_article-sp}
+\documentclass[12pt,twocolumn]{article}
+
+\usepackage{multirow}
+\usepackage{times}
+\usepackage[scaled=0.92]{helvet}
+\usepackage[T1]{fontenc}
+\usepackage{enumerate}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage[pdftex]{hyperref}
+\usepackage{url}
+\usepackage{mathptmx}
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{subfig}
+\usepackage[noadjust]{cite}
+\usepackage{array}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[super]{nth}
+
+\begin{document}
+\title{A Look at Artificial Neural Networks}
+\date{}
+
+%\numberofauthors{1}
+%\author{
+%\alignauthor Aaron Cahn\\
+%\affaddr{University of Wisconsin-Madison}\\
+%\email{cahn@cs.wisc.edu}
+%}
+
+
+\author{
+Aaron Cahn\\
+University of Wisconsin-Madison\\
+cahn@cs.wisc.edu
+}
+
+
+\maketitle
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\section{Introduction} \label{sec:intro} \input{intro}
+\section{Design and Implementation} \label{sec:design} \input{design}
+\section{Methodology} \label{sec:methodology} \input{methodology}
+\section{Results} \label{sec:results} \input{results}
+\section{Summary and Conclusions} \label{sec:summary} \input{summary}
+
+\bibliographystyle{plain}
+\bibliography{paper}
+
+\end{document}

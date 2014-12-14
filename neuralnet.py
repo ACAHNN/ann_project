@@ -2,7 +2,7 @@ import sys
 import math
 import random
 import numpy as np
-
+import cPickle as pickle
 
 
 class NeuralNet:
@@ -157,16 +157,21 @@ class NeuralNet:
 
 if __name__ == '__main__':
     ### TEST DATA ###
-    data = [(np.array([1,1]).reshape(1,2),np.array([0]).reshape(1,1)),
-            (np.array([1,0]).reshape(1,2),np.array([1]).reshape(1,1)),
-            (np.array([0,1]).reshape(1,2),np.array([1]).reshape(1,1)),
-            (np.array([0,0]).reshape(1,2),np.array([0]).reshape(1,1))]
+#    data = [(np.array([1,1]).reshape(1,2),np.array([0]).reshape(1,1)),
+#            (np.array([1,0]).reshape(1,2),np.array([1]).reshape(1,1)),
+#            (np.array([0,1]).reshape(1,2),np.array([1]).reshape(1,1)),
+#            (np.array([0,0]).reshape(1,2),np.array([0]).reshape(1,1))]
 #    data = [(np.array([1,0]).reshape(1,2),np.array([1,1]).reshape(1,2))]
     ################
 
-    nn = NeuralNet(2, [4], 1, .1)
-    nn.train(data, None, 1000000)
-    nn.test(data, None, True)
+    f = open('data/wbcd.pkl', 'rb')
+    data = pickle.load(f)
+    f.close()
+    
+    
+    nn = NeuralNet(9, [6], 1, .1)
+    nn.train(data, None, 1000)
+    nn.test(data, None, False)
     
     #nn.print_activations()
     #nn.print_errors()
