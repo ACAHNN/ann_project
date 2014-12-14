@@ -164,11 +164,11 @@ if __name__ == '__main__':
 #    data = [(np.array([1,0]).reshape(1,2),np.array([1,1]).reshape(1,2))]
     ################
 
-    nn = NeuralNet(2, [4], 1, .1)
-    nn.train(data, None, 1000000)
+    nn = NeuralNet(2, [3,2,4,2], 1, .1)
+    nn.train(data, None, 1000)
     nn.test(data, None, True)
     
-    #nn.print_activations()
-    #nn.print_errors()
-    #nn.print_weights()
+    nn.print_activations()
+    nn.print_errors()
+    nn.print_weights()
 
