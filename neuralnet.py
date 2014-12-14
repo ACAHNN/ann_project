@@ -164,14 +164,19 @@ if __name__ == '__main__':
 #    data = [(np.array([1,0]).reshape(1,2),np.array([1,1]).reshape(1,2))]
     ################
 
-    f = open('data/wbcd.pkl', 'rb')
-    data = pickle.load(f)
-    f.close()
+    f1 = open('data/face_train.pkl', 'rb')
+    f2 = open('data/face_test.pkl', 'rb')
+    
+    data1 = pickle.load(f1)
+    data2 = pickle.load(f2)
+    
+    f1.close()
+    f2.close()
     
     
-    nn = NeuralNet(9, [6], 1, .1)
-    nn.train(data, None, 1000)
-    nn.test(data, None, False)
+    nn = NeuralNet(361, [120], 1, .1)
+    nn.train(data1, None, 1)
+    nn.test(data2, None, False)
     
     #nn.print_activations()
     #nn.print_errors()
