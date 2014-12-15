@@ -152,7 +152,7 @@ class NeuralNet:
         # final accuracy
         print "Prediction Accuracy: ", (float(accuracy) / len(data))*100
         
-        return None
+        return (float(accuracy) / len(data))*100
 
 
 if __name__ == '__main__':
