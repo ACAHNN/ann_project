@@ -101,7 +101,6 @@ def face_data():
     f1.close()
     f2.close()
     
-
     for i in xrange(1, 122, 10):
         test_vals = []
         for j in range(10):
@@ -110,7 +109,6 @@ def face_data():
             test_vals.append(nn.test(data2, None, False))
         print "average ", sum(test_vals)/len(test_vals)
         print ""
-
 
 
 if __name__ == '__main__':

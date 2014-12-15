@@ -1,1 +1,32 @@
-TODO: Add the intro
+Artificial neural networks were originally inspired by the complex web of neurons that create the human brain.
+The core of a neural network is the perceptron, which is a simple representation of a neuron consisting of an activation function.
+The activation function is responsible for producing the output of the perceptron.
+Perceptrons are linked together in layers to form what is generally known as a multi-layer neural network.
+Historically, neural networks consist of an input layer, a single hidden layer, and an output layer.
+All layers are completely connected to the next layer and edge weights from layer \(i\) to layer \(i+1\) are trained by an algorithm known as back propagation.
+Because of this, a neural network with a hidden layers can represent arbitrary functions.
+
+When a neural network contains more than a single layer, it is often referred to as a deep network.
+However, there is debate over whether this criteria alone constitutes a deep network.
+Generally, training a deep network through backpropagation alone is insufficient because of the large number of local minimum that exist on the complex error surface.
+Therefore, different techniques, which incrementally train a layer of weights at a time, are needed for deep networks.
+
+Neural networks, and more specifically the edge weights from layer to layer, can easily be represented by matrices.
+This representation lends itself to fast, parallel computations.
+As a result, neural networks are extremely popular for tasks that require a complex representation space.
+Many groups have used neural networks for modeling complex systems, performing image recognition tasks, and performing autonomous tasks such as flying a helicopter. {\bf citation}
+
+In this paper we focus on neural networks with one and two hidden layers.
+Attempting to utilize more than two hidden layers trained using standard backpropagation does not improve accuracy over the data sets we use.
+Extending the neural network framework to include a deep training function is left to future work as we were unable to implement it before the deadline.
+
+Our paper attempts to shed light on the trade offs a researcher can make between performance and computation cost.
+We motivate this by exploring the parameter space of our neural network framework and demonstrating the accuracy under different network configurations.
+We also explore building an ensemble of neural networks on top of our framework.
+We make the following contributions: <list contributions>
+
+The rest of this paper is organized as follows.
+Section~\ref{sec:design} explains the design and implementation choices of our framework.
+Section~\ref{sec:methodology} explains the data sets we use for experimentation and the experiments we ran.
+Section~\ref{sec:results} reports the results from the experiments we ran on our framework.
+Section~\ref{sec:summary} concludes.
