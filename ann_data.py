@@ -27,7 +27,7 @@ def create_cross_folds(data, n):
 
 def cross_validation(folds, epochs, learn_rate, n):
     averages = []
-    for i in xrange(10):
+    for i in xrange(15):
         test_vals = []
         for x in xrange(len(folds.keys())):
             test_index = x%n
@@ -50,8 +50,8 @@ def cross_validation(folds, epochs, learn_rate, n):
         
 def cross_validation_2(folds, epochs, learn_rate, n):
     averages = []
-    for i in xrange(10):
-        for j in xrange(10):
+    for i in xrange(15):
+        for j in xrange(15):
             test_vals = []
             for x in xrange(len(folds.keys())):
                 test_index = x%n
@@ -81,13 +81,22 @@ def wbcd_data():
 
     folds = create_cross_folds(data1, 10)
     
-    averages = cross_validation_2(folds, 10, .1, 100)
+    averages = cross_validation(folds, 100, .1, 10)
+
+    f = open('data/wbcd_results_hidden_vary.pkl', 'wb')
+    desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
+           "units from 1 to 10, hidden layer = 1, epochs = 100"
+    
+    pickle.dump((averages,desc), f)
+    f.close()
+
+    averages = cross_validation_2(folds, 100, .1, 10)
 
     f = open('data/wbcd_results_hidden_vary_layers.pkl', 'wb')
     desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
            "units from 1 to 10, hidden layer = 2, epochs = 100"
     
-    pickle.dump((desc,averages), f)
+    pickle.dump((averages,averages), f)
     f.close()
 
 def face_data():
@@ -142,6 +151,6 @@ def face_data():
 
 if __name__ == '__main__':
 
-    #wbcd_data()
-    face_data()
+    wbcd_data()
+    #face_data()
     
