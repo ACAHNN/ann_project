@@ -106,7 +106,7 @@ def face_data():
         test_vals = []
         for j in range(10):
             nn = NeuralNet(361, [i], 1, .1)
-            nn.train(data1, None, 1000)
+            nn.train(data1, None, 100)
             test_vals.append(nn.test(data2, None, False))
         averages.append(sum(test_vals)/len(test_vals))
         print "average ", sum(test_vals)/len(test_vals)
@@ -114,7 +114,7 @@ def face_data():
 
     f = open('data/face_results_hidden_vary.pkl', 'wb')
     desc = "face detection averages over 10 runs on train set at each hidden " +\
-           "units from 1 to 121, hidden layer = 1, epochs = 1000"
+           "units from 1 to 121, hidden layer = 1, epochs = 100"
     
     pickle.dump((desc,averages), f)
     f.close()
@@ -126,7 +126,7 @@ def face_data():
             test_vals = []
             for j in range(10):
                 nn = NeuralNet(361, [i,x], 1, .1)
-                nn.train(data1, None, 1000)
+                nn.train(data1, None, 100)
                 test_vals.append(nn.test(data2, None, False))
             averages.append(sum(test_vals)/len(test_vals))
             print "average ", sum(test_vals)/len(test_vals)
@@ -134,7 +134,7 @@ def face_data():
 
     f = open('data/face_results_hidden_vary_layers.pkl', 'wb')
     desc = "face detection averages over 10 runs on train set at each hidden " +\
-           "units from 1 to 121, hidden layer = 2, epochs = 1000"
+           "units from 1 to 121, hidden layer = 2, epochs = 100"
     
     pickle.dump((desc,averages), f)
     f.close()
