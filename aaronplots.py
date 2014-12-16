@@ -8,7 +8,7 @@ if __name__ == "__main__":
            ([1, 2, 3], [10, 20, 30], "hiyo!3")]
     desc = "dummy"
     
-    pts, desc = pickle.load(open("data/wbcd_results_iterative.pkl"))
+    pts, desc = pickle.load(open("data/wbcd_results_iterative1.pkl"))
     #pts, desc = pickle.load(open("hw2q6.pkl"))
 
     fig = plt.figure(figsize = (5, 5))
@@ -16,6 +16,7 @@ if __name__ == "__main__":
     
     ax.set_xlabel("Epoch (e)")
     ax.set_ylabel("Accuracy")
+    ax.set_xscale("log")
     
     #ax.set_xlabel("False positive rate")
     #ax.set_ylabel("True positive rate")

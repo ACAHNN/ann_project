@@ -4,7 +4,7 @@ import cPickle as pickle
 import numpy as np
 
 if __name__ == "__main__":
-    data, desc = pickle.load(open("data/wbcd_results_full_matrix.pkl"))
+    data, desc = pickle.load(open("data/wbcd_results_full_matrix1.pkl"))
     print desc
     fig = plt.figure(figsize = (12, 5))
     ax = fig.add_subplot(111)
@@ -12,9 +12,9 @@ if __name__ == "__main__":
     ax.set_xlabel("Number of Units in the 1st Hidden Layer")
     ax.set_ylabel("Numer of Units in the 2nd Hidden Layer")
     
-    ax.set_yticks(range(0,11))
-    ax.set_xticks(range(0,10))
-    ax.set_xticklabels(range(1,11))
+    ax.set_yticks(range(0,16))
+    ax.set_xticks(range(0,15))
+    ax.set_xticklabels(range(1,16))
     
     
     cmap = plt.get_cmap("jet")

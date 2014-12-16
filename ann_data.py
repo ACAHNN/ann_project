@@ -89,7 +89,7 @@ def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
         for k,v in folds.items():
             if k != test_index: train_set += v
         
-        nn = NeuralNet(9, [8,8], 1, learn_rate)
+        nn = NeuralNet(9, [13,14], 1, learn_rate)
         
         for j in xrange(epochs):
             nn.train(train_set, None, 1)
@@ -127,35 +127,35 @@ def wbcd_data():
 
     folds = create_cross_folds(data1, 10)
     
+    epochs = 400
     """
-    averages = cross_validation(folds, 100, .1, 10)
+    averages = cross_validation(folds, epochs, .1, 10)
 
-    f = open('data/wbcd_results_hidden_vary.pkl', 'wb')
+    f = open('data/wbcd_results_hidden_vary1.pkl', 'wb')
     desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
            "units from 1 to 10, hidden layer = 1, epochs = 100"
     
     pickle.dump((averages,desc), f)
     f.close()
 
-    averages = cross_validation_2(folds, 100, .1, 10)
+    averages = cross_validation_2(folds, epochs, .1, 10)
 
-    f = open('data/wbcd_results_hidden_vary_layers.pkl', 'wb')
+    f = open('data/wbcd_results_hidden_vary_layers1.pkl', 'wb')
     desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
            "units from 1 to 10, hidden layer = 2, epochs = 100"
     
     pickle.dump((averages,desc), f)
     f.close()
     """
-    epochs = 400
+
     train_a, test_a = cross_validation_iterative(folds, epochs, .1, 10, len(data1))
     data = [([i for i in xrange(epochs)],train_a,"avg train"),([i for i in xrange(epochs)],test_a,"avg test")] 
     
-    f = open('data/wbcd_results_iterative.pkl', 'wb')
-    desc = "breast cancers iterative accuracy from 1 to 10000 epochs on train and test"
+    f = open('data/wbcd_results_iterative1.pkl', 'wb')
+    desc = "breast cancers iterative accuracy from 1 to 400 epochs on train and test"
     
     pickle.dump((data,desc), f)
     f.close()
-
 
 def face_data():
 
