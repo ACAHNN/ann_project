@@ -11,9 +11,11 @@ if __name__ == "__main__":
     
     ax.set_xlabel("Number of Units in the 1st Hidden Layer")
     ax.set_ylabel("Numer of Units in the 2nd Hidden Layer")
-
-    ax.set_yticks(range(1,10))
+    
+    ax.set_yticks(range(0,11))
     ax.set_xticks(range(0,10))
+    ax.set_xticklabels(range(1,11))
+    
     
     cmap = plt.get_cmap("jet")
     
@@ -29,9 +31,12 @@ if __name__ == "__main__":
     min_val, max_val = 0, data.shape[1] 
     ind_array2 = np.arange(min_val, max_val + 0.0, 1.0)
     
+    
     x, y = np.meshgrid(ind_array1, ind_array2)
     print x.shape, y.shape, data.shape
-    rng = np.max(data) - np.min(data)
+    rng = np.max(data) - np.min(data)    
+
+    
     for i, (x_val, y_val) in enumerate(zip(x.flatten(), y.flatten())):
         #c = 'x' if i%2 else 'o' 
         val = data[x_val, y_val]
@@ -40,4 +45,6 @@ if __name__ == "__main__":
         text = ax.text(y_val, x_val, label, va='center', ha='center', color = 'white')
         text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                                path_effects.Normal()])
+    
+    
     plt.savefig("writeup/figs/wbcd_table.pdf")
