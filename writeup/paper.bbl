@@ -1,5 +1,16 @@
 \begin{thebibliography}{1}
 
+\bibitem{alvira2001}
+M.~Alvira and R.~Rifkin.
+\newblock An empirical comparison of snow and svms for face detection.
+\newblock A.I. memo 2001-004, Center for Biological and Computational Learning,
+  MIT, Cambridge, MA, 2001.
+
+\bibitem{kim1997nonlinear}
+Byoung~S Kim and Anthony~J Calise.
+\newblock Nonlinear flight control using neural networks.
+\newblock {\em Journal of Guidance, Control, and Dynamics}, 20(1):26--33, 1997.
+
 \bibitem{wolberg1990multisurface}
 W~Wolberg and O~Mangasarian.
 \newblock Multisurface method of pattern separation for medical diagnosis

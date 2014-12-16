@@ -6,8 +6,15 @@ import numpy as np
 if __name__ == "__main__":
     desc, data = pickle.load(open("data/wbcd_results_full_matrix.pkl"))
     print desc
-    fig = plt.figure(figsize = (10, 4))
+    fig = plt.figure(figsize = (12, 5))
     ax = fig.add_subplot(111)
+    
+    ax.set_xlabel("Number of Units in the 1st Hidden Layer")
+    ax.set_ylabel("Numer of Units in the 2nd Hidden Layer")
+
+    ax.set_yticks(range(1,10))
+    ax.set_xticks(range(0,10))
+    
     cmap = plt.get_cmap("jet")
     
     c = ax.imshow(data, interpolation = "none", cmap = cmap, aspect = 0.4, origin='bottom')
@@ -33,4 +40,4 @@ if __name__ == "__main__":
         text = ax.text(y_val, x_val, label, va='center', ha='center', color = 'white')
         text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                                path_effects.Normal()])
-    plt.savefig("out.pdf")
+    plt.savefig("writeup/figs/wbcd_table.pdf")

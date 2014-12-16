@@ -1,20 +1,20 @@
 Artificial neural networks were originally inspired by the complex web of neurons that create the human brain.
 The core of a neural network is the perceptron, which is a simple representation of a neuron consisting of an activation function.
-The activation function is responsible for producing the output of the perceptron.
+The activation function is responsible for producing the output of a perceptron.
 Perceptrons are linked together in layers to form what is generally known as a multi-layer neural network.
 Historically, neural networks consist of an input layer, a single hidden layer, and an output layer.
 All layers are completely connected to the next layer and edge weights from layer \(i\) to layer \(i+1\) are trained by an algorithm known as back propagation.
-Because of this, a neural network with a hidden layers can represent arbitrary functions.
+Because of this, a neural network with hidden layers can represent arbitrary functions.
 
 When a neural network contains more than a single layer, it is often referred to as a deep network.
 However, there is debate over whether this criteria alone constitutes a deep network.
-Generally, training a deep network through backpropagation alone is insufficient because of the large number of local minimum that exist on the complex error surface.
-Therefore, different techniques, which incrementally train a layer of weights at a time, are needed for deep networks.
+Generally, training a deep network through backpropagation alone is insufficient because of the large number of local minimum that exist over the complex error surface.
+Therefore, different techniques, which incrementally train one layer of weights at a time, are needed for deep networks.
 
 Neural networks, and more specifically the edge weights from layer to layer, can easily be represented by matrices.
 This representation lends itself to fast, parallel computations.
 As a result, neural networks are extremely popular for tasks that require a complex representation space.
-Many groups have used neural networks for modeling complex systems, performing image recognition tasks, and performing autonomous tasks such as flying a helicopter. {\bf citation}
+Many groups have used neural networks for modeling complex systems {\bf CITE}, performing image recognition tasks~\cite{alvira2001}, and performing autonomous tasks such as flight control~\cite{kim1997nonlinear}.
 
 In this paper we focus on neural networks with one and two hidden layers.
 Attempting to utilize more than two hidden layers trained using standard backpropagation does not improve accuracy over the data sets we use.

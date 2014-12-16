@@ -1,11 +1,12 @@
-The artificial neural network was implemented in Python.
-It consists of a single class which takes arguments for {\em (i)} the number of input units {\em (ii)} a list containing the number hidden units to create at each hidden layer (the length of the list defines the number of hidden layers) {\em (iii)} the number of output units {\em (iv)} the learn rate and {\em (v)} the number of epochs to train the neural network for.
-The neural network edge weights from layer \(i\) to layer \(i+1\) are represented by a \(m-by-n\) matrix, where \(m\) is the number of units in layer \(i\) and \(n\) is the number of units in layer \(i+1\).
-The network activations and errors are represented as single row matrices for computational convenience. 
-As a result, all computations are fast and efficient.
-Additionally, this design choice makes the neural network implementation very comprehensible.
-The neural network framework exports an API which allows the user to {\em (i)} feed a single instance through the network {\em (ii)} run backpropagation {\em (iii)} train on a set of data {\em (iv)} test a set of data and {\em (v)} a set of functions to print weights, errors, and activations.
-The latter being useful for debugging from the command line.
- 
+Our artificial neural network framework was implemented in Python.
+It consists of a single class which takes arguments for {\em (i)} the number of input units {\em (ii)} a list \(H\), where the \(ith\) entry of \(H\) represents the number of units to create at layer \(i\) {\em (iii)} the number of output units {\em (iv)} the learn rate to use during training and {\em (v)} the number of epochs to train the neural network for.
+If cross validation is being used the user also has control over the number of folds to create.
 
+A neural network's edge weights from layer \(i\) to layer \(i+1\) are represented by a \(m-by-n\) matrix, where \(m\) is the number of units in layer \(i\) and \(n\) is the number of units in layer \(i+1\).
+Additionally, we represent network activations and errors as each layer \(i\) are represented as single row matrices for computational convenience.
+As a result, all computations are fast and efficient.
+Note, this design choice makes the neural network implementation very comprehensible.
+
+The neural network framework exports an API which allows the developer to {\em (i)} feed a single instance through the network {\em (ii)} run backpropagation {\em (iii)} train on a set of data {\em (iv)} test on a set of data and {\em (v)} print weights, errors, and activations.
+The functionality exported by {\em (v)} is for ease of debugging from the command line.
 

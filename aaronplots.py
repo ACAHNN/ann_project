@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     ax.grid(True, color = 'grey')
     
-    plt.savefig("figs/wbcd_iterative.pdf")
+    plt.savefig("writeup/figs/wbcd_iterative.pdf")
     #plt.savefig("hw2q6.pdf")
     
     #plt.show()

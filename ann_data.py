@@ -146,7 +146,7 @@ def wbcd_data():
     pickle.dump((averages,desc), f)
     f.close()
     """
-    epochs = 1000
+    epochs = 400
     train_a, test_a = cross_validation_iterative(folds, epochs, .1, 10, len(data1))
     data = [([i for i in xrange(epochs)],train_a,"avg train"),([i for i in xrange(epochs)],test_a,"avg test")] 
     
