@@ -4,7 +4,7 @@ import cPickle as pickle
 import numpy as np
 
 if __name__ == "__main__":
-    desc, data = pickle.load(open("data/wbcd_results_full_matrix.pkl"))
+    data, desc = pickle.load(open("data/wbcd_results_full_matrix.pkl"))
     print desc
     fig = plt.figure(figsize = (12, 5))
     ax = fig.add_subplot(111)
