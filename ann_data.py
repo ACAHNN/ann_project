@@ -73,6 +73,52 @@ def cross_validation_2(folds, epochs, learn_rate, n):
     return averages
 
 
+def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
+    
+    averages = []
+    test_vals = []
+    fold_results = {}
+    
+    for x in xrange(len(folds.keys())):
+        fold_results[x] = {"train": [], "test": []}
+        
+        test_index = x%n
+        test_set = folds[test_index]
+
+        train_set = []
+        for k,v in folds.items():
+            if k != test_index: train_set += v
+        
+        nn = NeuralNet(9, [8,8], 1, learn_rate)
+        
+        for j in xrange(epochs):
+            nn.train(train_set, None, 1)
+        
+            # get train and test accuracy
+            train_val = nn.test(train_set, None, False)
+            test_val = nn.test(test_set, None, False)
+            
+            # store the accuracy results
+            fold_results[x]["train"].append(train_val)
+            fold_results[x]["test"].append(test_val)
+
+        print "fold complete"
+
+    
+    # compute the average for each epoch
+    train_a, test_a = [], []
+    for e in xrange(epochs):
+        num_train, num_test = 0, 0
+        for i in xrange(len(folds.keys())):
+            num_train += fold_results[i]["train"][e]
+            num_test += fold_results[i]["test"][e]
+        train_a.append((float(num_train)/(num_points*(n-1)))*100)
+        test_a.append((float(num_test)/num_points)*100)
+    
+    print train_a, test_a
+    return train_a, test_a
+
+
 def wbcd_data():
 
     f1 = open('data/wbcd.pkl', 'rb')
@@ -81,6 +127,7 @@ def wbcd_data():
 
     folds = create_cross_folds(data1, 10)
     
+    """
     averages = cross_validation(folds, 100, .1, 10)
 
     f = open('data/wbcd_results_hidden_vary.pkl', 'wb')
@@ -96,8 +143,19 @@ def wbcd_data():
     desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
            "units from 1 to 10, hidden layer = 2, epochs = 100"
     
-    pickle.dump((averages,averages), f)
+    pickle.dump((averages,desc), f)
     f.close()
+    """
+    epochs = 1000
+    train_a, test_a = cross_validation_iterative(folds, epochs, .1, 10, len(data1))
+    data = [([i for i in xrange(epochs)],train_a,"avg train"),([i for i in xrange(epochs)],test_a,"avg test")] 
+    
+    f = open('data/wbcd_results_iterative.pkl', 'wb')
+    desc = "breast cancers iterative accuracy from 1 to 10000 epochs on train and test"
+    
+    pickle.dump((data,desc), f)
+    f.close()
+
 
 def face_data():
 
