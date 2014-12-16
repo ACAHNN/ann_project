@@ -1,3 +1,10 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{wolberg1990multisurface}
+W~Wolberg and O~Mangasarian.
+\newblock Multisurface method of pattern separation for medical diagnosis
+  applied to breast cytology,.
+\newblock In {\em Proceedings of the National Academy of Sciences}, pages
+  9193--9196, Dec 1990.
 
 \end{thebibliography}
