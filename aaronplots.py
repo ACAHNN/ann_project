@@ -24,7 +24,7 @@ if __name__ == "__main__":
     #ax.set_ylabel("True positive rate")
 
     #ax.set_title("WBCD ROC Curve")
-    ax.set_title("Hidden Unit/Layer Combinations vs. Computation Cost")
+    ax.set_title("Hidden Unit/Layer Combinations\nvs. Computational Cost")
     #ax.set_title("ROC Curve of Sonar Data Set (Mine == pos)")
     
     #ax2 = ax.twinx()
