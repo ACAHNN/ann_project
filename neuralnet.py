@@ -139,6 +139,7 @@ class NeuralNet:
     
     def test(self, data, target, verbose):
         accuracy = 0
+        results = []
         for instance in data:
             # feed the instance
             self.feed(instance[0])
@@ -148,13 +149,15 @@ class NeuralNet:
             accuracy += 1 if (predictions == instance[1]).all() else 0
             # debug printing
             if verbose: print predictions, instance[1], self.output_activations
+            
+            results.append([predictions, instance[1], self.output_activations])
         
         # final accuracy
         print "Prediction Accuracy: ", (float(accuracy) / len(data))*100
         
-        #return (float(accuracy) / len(data))*100
-        return accuracy
-
+        return (float(accuracy) / len(data))*100
+        #return accuracy
+        #return results
 
 if __name__ == '__main__':
     ### TEST DATA ###

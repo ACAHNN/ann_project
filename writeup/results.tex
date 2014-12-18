@@ -1,28 +1,3 @@
-%\begin{table*}
-%
-%    \begin{center}
-%      \title{Accuracy while varying the number hidden layer units}
-%      \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
-%        \hline
-%        Layers & 1     & 2     & 3     & 4     & 5     & 6     & 7     & 8     & 9     & 10    \\ \hline
-%        0               & 65.01 & 71.18 & 71.47 & 68.10 & 77.61 & 71.24 & 77.86 & 80.90 & 80.90 & 83.98 \\ \hline
-%        1               & 65.01 & 65.01 & 65.01 & 68.40 & 72.51 & 70.01 & 68.20 & 70.58 & 70.95 & 77.50 \\ \hline
-%        2               & 65.01 & 65.01 & 67.90 & 82.71 & 74.08 & 89.73 & 87.58 & 88.27 & 91.94 & 91.05 \\ \hline
-%        3               & 65.01 & 65.01 & 73.93 & 84.18 & 92.96 & 89.43 & 91.93 & 91.93 & 91.79 & 91.05 \\ \hline
-%        4               & 65.01 & 68.10 & 76.72 & 85.17 & 89.88 & 92.81 & 92.81 & 93.10 & 92.81 & 92.96 \\ \hline
-%        5               & 65.01 & 65.01 & 70.99 & 91.19 & 87.80 & 90.20 & 93.69 & 92.96 & 93.84 & 93.98 \\ \hline
-%        6               & 65.01 & 65.01 & 70.85 & 88.50 & 91.49 & 93.98 & 92.67 & 93.99 & 93.98 & 94.28 \\ \hline
-%        7               & 65.01 & 65.01 & 77.02 & 85.94 & 94.28 & 94.86 & 94.71 & 94.72 & 95.01 & 94.28 \\ \hline
-%        8               & 65.01 & 65.01 & 68.54 & 83.50 & 91.82 & 91.67 & 94.86 & {\bf 95.60} & 94.87 & 95.15 \\ \hline
-%        9               & 65.01 & 68.20 & 74.18 & 92.06 & 94.86 & 92.22 & 95.30 & 94.72 & 95.45 & 95.16 \\ \hline
-%        10              & 65.01 & 65.01 & 73.74 & 80.84 & 91.92 & 95.30 & 95.59 & 95.59 & 95.30 & 95.30 \\ \hline
-%      \end{tabular}
-%    \end{center}
-%    \label{tab:breast}
-%    \caption {Accuracy for neural networks with one and two hidden layers. Entry \(i,j\) represents a neural network with \(j\) units in the first hidden layer and \(i\) units in the second hidden layer ({\em i.e.,} row 0 represents neural networks with only one hidden layer). The bold entry represents max accuracy.}
-%
-%\end{table*}
-
 \begin{figure*}[t]
   \title{Accuracy at Various Hidden Unit/Layer Combinations}
 \centering
@@ -43,16 +18,36 @@
 \end{figure}
 
 
-Plots we have data for:\\
-1. average accuracy for 1 hidden layer hidden units vary from 1-10 using 10 fold cross validation, epoch = 10\\
-2. average accuracy for 2 hidden layer hidden units vary from 1-10 using 10 fold cross validation, epoch = 100\\
-(1 and 2 will be combined into a single table, wbcd data)\\
-3. average accuracy for 1 hidden layer hidden units vary from 1-120, epoch = 1000\\
-4. average accraucy for 2 hidden layer hidden units vary from 1-120, epoch = 1000\\
-(3 and 4 will combine into a single table, face data)\\
+\begin{figure}[t]
 
-TODO: Add the results\\
-5. Ensemble of neural networks using the best combination of parameters from 1 and 2 (plot varying the number of neural nets)\\
-6. Ensemble of neural networks using the best combination of parameters from 3 and 4 (plot varying the number of neural nets)\\
- 
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/wbcd_timing_iterative}
+\caption {Add caption}
+\label{fig:wbcd_iterative_timing}
 
+\end{figure}
+
+
+\begin{figure}[t]
+
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/wbcd_roc}
+\caption {Add caption}
+\label{fig:wbcd_roc}
+
+\end{figure}
+
+
+\begin{figure}[t]
+
+\centering
+\includegraphics[width=0.95\columnwidth]{figs/wbcd_timing}
+\caption {Add caption}
+\label{fig:wbcd_timing}
+
+\end{figure}
+
+RESULT CHECKLIST:\\
+1. Add the ensemble plot\\
+2. Discuss each plot in turn (interesting point from each)\\
+3. Synthesize general result message (prediction accuracy vs. cost)\\

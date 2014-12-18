@@ -10,3 +10,8 @@ Note, this design choice makes the neural network implementation very comprehens
 The neural network framework exports an API which allows the developer to {\em (i)} feed a single instance through the network {\em (ii)} run backpropagation {\em (iii)} train on a set of data {\em (iv)} test on a set of data and {\em (v)} print weights, errors, and activations.
 The functionality exported by {\em (v)} is for ease of debugging from the command line.
 
+IMPLEMENTATION CHECKLIST:\\
+1. Randomized initial values for weights\\
+2. Allowing this to be a parameter\\
+3. Ensemble implementation (how voting works)\\
+4. Sigmoid function (parameterize this as well)

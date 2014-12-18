@@ -26,8 +26,12 @@ def create_cross_folds(data, n):
 
 
 def cross_validation(folds, epochs, learn_rate, n):
+    
     averages = []
-    for i in xrange(15):
+    timings = []
+    start_t = time.time()
+    
+    for i in xrange(10):
         test_vals = []
         for x in xrange(len(folds.keys())):
             test_index = x%n
@@ -44,14 +48,19 @@ def cross_validation(folds, epochs, learn_rate, n):
         print "average: ", sum(test_vals) / len(test_vals)
         print ""
 
+        timings.append(time.time()-start_t)
         averages.append(sum(test_vals)/len(test_vals))        
         
-    return averages
+    return averages, timings
         
 def cross_validation_2(folds, epochs, learn_rate, n):
     averages = []
-    for i in xrange(15):
-        for j in xrange(15):
+    timings = []
+    start_t = time.time()
+    for i in xrange(10):
+        averages.append([])
+        timings.append([])
+        for j in xrange(10):
             test_vals = []
             for x in xrange(len(folds.keys())):
                 test_index = x%n
@@ -61,16 +70,17 @@ def cross_validation_2(folds, epochs, learn_rate, n):
                 for k,v in folds.items():
                     if k != test_index: train_set += v
         
-                nn = NeuralNet(9, [i+1,j+1], 1, learn_rate)
+                nn = NeuralNet(9, [j+1,i+1], 1, learn_rate)
                 nn.train(train_set, None, epochs)
                 test_vals.append(nn.test(test_set, None, False))
 
             print "average: ", sum(test_vals) / len(test_vals)
             print ""
 
-            averages.append(sum(test_vals)/len(test_vals))        
-        
-    return averages
+            timings[i].append(time.time()-start_t)
+            averages[i].append(sum(test_vals)/len(test_vals))        
+
+    return averages, timings
 
 
 def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
@@ -78,7 +88,8 @@ def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
     averages = []
     test_vals = []
     fold_results = {}
-    
+    timings = [0]*epochs
+
     for x in xrange(len(folds.keys())):
         fold_results[x] = {"train": [], "test": []}
         
@@ -91,6 +102,7 @@ def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
         
         nn = NeuralNet(9, [13,14], 1, learn_rate)
         
+        start_t = time.time()
         for j in xrange(epochs):
             nn.train(train_set, None, 1)
         
@@ -101,7 +113,7 @@ def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
             # store the accuracy results
             fold_results[x]["train"].append(train_val)
             fold_results[x]["test"].append(test_val)
-
+            timings[j] += time.time()-start_t
         print "fold complete"
 
     
@@ -115,9 +127,11 @@ def cross_validation_iterative(folds, epochs, learn_rate, n, num_points):
         train_a.append((float(num_train)/(num_points*(n-1)))*100)
         test_a.append((float(num_test)/num_points)*100)
     
-    print train_a, test_a
-    return train_a, test_a
-
+    for e in xrange(epochs):
+        timings[e] = float(timings[e])/len(folds.keys())
+    
+    print train_a, test_a, timings
+    return train_a, test_a, timings
 
 def wbcd_data():
 
@@ -125,9 +139,31 @@ def wbcd_data():
     data1 = pickle.load(f1)
     f1.close()
 
+    """
+    fpr, tpr = create_roc_data(data1)
+    data = [(fpr, tpr, "tpr/fpr")]
+    f = open('roc.pkl','wb')
+    pickle.dump((data,""),f)
+    f.close()
+    """
+
     folds = create_cross_folds(data1, 10)
+    epochs = 10
     
-    epochs = 400
+    averages,timings = cross_validation(folds, epochs, .1, 10)
+    averages1,timings1 = cross_validation_2(folds, epochs, .1, 10)    
+    
+    data = [(timings,averages,"0 HL2 units")]
+    for i in xrange(10):
+        data.append((timings1[i],averages1[i], "%d HL2 units"%(i+1)))
+    
+    f = open('data/wbcd_results_timing.pkl', 'wb')
+    desc = "breast cancers averages over 10 fold cross validation varying hidden " +\
+           "units from 1 to 10, hidden layer = 2, epochs = 10 (with timings)"
+
+    pickle.dump((data,desc), f)
+    f.close()
+    
     """
     averages = cross_validation(folds, epochs, .1, 10)
 
@@ -146,69 +182,76 @@ def wbcd_data():
     
     pickle.dump((averages,desc), f)
     f.close()
-    """
 
-    train_a, test_a = cross_validation_iterative(folds, epochs, .1, 10, len(data1))
-    data = [([i for i in xrange(epochs)],train_a,"avg train"),([i for i in xrange(epochs)],test_a,"avg test")] 
+
+    train_a, test_a, timings = cross_validation_iterative(folds, epochs, .1, 10, len(data1))
+    data = [(timings,train_a,"avg train/compute time"),
+            (timings,test_a,"avg test/compute time")] 
     
-    f = open('data/wbcd_results_iterative1.pkl', 'wb')
-    desc = "breast cancers iterative accuracy from 1 to 400 epochs on train and test"
+    f = open('data/wbcd_results_iterative_timings.pkl', 'wb')
+    desc = "breast cancers iterative accuracy from 1 to 400 epochs on train and test with timings"
     
     pickle.dump((data,desc), f)
     f.close()
+    """
+    return None
 
-def face_data():
+def create_roc_data(data):
+    
+    epochs = 60
+    nn = NeuralNet(9, [13,14], 1, .1)
+    nn.train(data, None, epochs)
+    ret = nn.test(data, None, False)
 
-    f1 = open('data/face_train.pkl', 'rb')
-    f2 = open('data/face_test.pkl', 'rb')
-    
-    data1 = pickle.load(f1)
-    data2 = pickle.load(f2)
-    
-    f1.close()
-    f2.close()
-    
-    averages = []
-    for i in xrange(1, 122, 10):
-        test_vals = []
-        for j in range(10):
-            nn = NeuralNet(361, [i], 1, .1)
-            nn.train(data1, None, 100)
-            test_vals.append(nn.test(data2, None, False))
-        averages.append(sum(test_vals)/len(test_vals))
-        print "average ", sum(test_vals)/len(test_vals)
-        print ""
+    results = []
+    for row in ret:
+        results.append((row[0][0][0],row[1][0][0],row[2][0][0]))
 
-    f = open('data/face_results_hidden_vary.pkl', 'wb')
-    desc = "face detection averages over 10 runs on train set at each hidden " +\
-           "units from 1 to 121, hidden layer = 1, epochs = 100"
-    
-    pickle.dump((desc,averages), f)
-    f.close()
-    
+    print results[0]
 
-    averages = []
-    for i in xrange(1, 122, 10):
-        for x in xrange(1, 122, 10):
-            test_vals = []
-            for j in range(10):
-                nn = NeuralNet(361, [i,x], 1, .1)
-                nn.train(data1, None, 100)
-                test_vals.append(nn.test(data2, None, False))
-            averages.append(sum(test_vals)/len(test_vals))
-            print "average ", sum(test_vals)/len(test_vals)
-            print ""
+    num_pos = len(filter(lambda x: x[1] == 1, results))
+    num_neg = len(results)-num_pos
 
-    f = open('data/face_results_hidden_vary_layers.pkl', 'wb')
-    desc = "face detection averages over 10 runs on train set at each hidden " +\
-           "units from 1 to 121, hidden layer = 2, epochs = 100"
+    results.sort(key=lambda x: x[-1])
+    results.reverse()
+
+    tp = 0
+    fp = 0
+    last_tp = 0
+
+    roc_set = [[x[-2],x[-1]] for x in results]
+    fpr_set = []
+    tpr_set = []
+
+    for i in range(1,len(roc_set)):
+        if roc_set[i][1] != roc_set[i-1][1] and roc_set[i][0] != 1 and tp > last_tp:
+            fpr = fp / float(num_neg)
+            tpr = tp / float(num_pos)
+            
+            fpr_set.append(fpr)
+            tpr_set.append(tpr)
+
+            last_tp = tp
+        if roc_set[i][0] == 1:
+            tp += 1
+        else:
+            fp += 1
+
+    fpr = fp / float(num_neg)
+    tpr = tp / float(num_pos)
+
+    fpr_set.append(fpr)
+    tpr_set.append(tpr)
+
+    return fpr_set, tpr_set
+
+def ensemble_network():
+
     
-    pickle.dump((desc,averages), f)
-    f.close()
+    return None
 
 
 if __name__ == '__main__':
 
     wbcd_data()
-    #face_data()
     
