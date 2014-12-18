@@ -56,10 +56,12 @@ def cross_validation(folds, epochs, learn_rate, n):
 def cross_validation_2(folds, epochs, learn_rate, n):
     averages = []
     timings = []
-    start_t = time.time()
+
+    
     for i in xrange(10):
         averages.append([])
         timings.append([])
+        start_t = time.time()
         for j in xrange(10):
             test_vals = []
             for x in xrange(len(folds.keys())):
@@ -77,9 +79,13 @@ def cross_validation_2(folds, epochs, learn_rate, n):
             print "average: ", sum(test_vals) / len(test_vals)
             print ""
 
+
             timings[i].append(time.time()-start_t)
             averages[i].append(sum(test_vals)/len(test_vals))        
 
+            print timings[i]
+            print averages[i]
+    
     return averages, timings
 
 
