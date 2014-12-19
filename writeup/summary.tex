@@ -1,4 +1,10 @@
-SUMMARY CHECKLIST:\\
-1. Take synthesized result and generalize into general rules about the need to search parameter spaces exhaustively\\
-2. Talk about the consideration that need to made for choosing between certain tradoffs
-3. Conclude
+In this study we have built a general neural network framework that allows us to construct networks with arbitrary combinations of input/hidden/output perceptrons, any number of hidden layers, and train for any number of epochs.
+This flexibility allows us to do a parameter space search to both demonstrate the necessity of doing such a search and train a model that has the overall best predictive accuracy on the data set we utilized.
+
+We argue that it is naive for someone wishing to use a neural network for a given learning task to simply hard code these parameters.
+Due to the potentially large size of the parameter space it is important to exhaust it as best as possible before training a final model.
+However, we have also demonstrated that this alone does not suffice.
+As the complexity of the target concept and the instances increases so to will the neural network.
+This means that very quickly a trade off between the potential predictive accuracy of the model and the computational effort to search the parameter space needs to be made ({\em i.e.,} what parts of the parameter space should be searched to discover parameters that lead to the desired predictive accuracy).
+Luckily, much of this work lends itself to models of parallel processing and grid search, in which case the trade offs need not be so stark.
+

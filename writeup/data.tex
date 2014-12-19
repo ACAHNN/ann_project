@@ -1,0 +1,10 @@
+For the parameter space analysis we utilize the Wisconsin Breast Cancer data set from the UCI Machine Learning Repository.
+The WBC data set contains 699 instances and each instance contains 9 attributes that can take on values from the set \({1,...,10}\).
+Detailed information about each attribute can be found on the UCI web page~\footnote{\url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Original)}}
+The class label an instance can take on is either {\em benign} or {\em malignant}.
+
+To utilize the WBC data set we did a small amount of pre-processing to format the data in a manner our framework understands.
+First, we converted the comma separated list of attributes for each instance into a single row matrix.
+The class label is converted into a separate single row matrix as well.
+Note, although the WBC data set class label is binary, the above step allows our framework to generalize to multi-class data sets easily.
+Second, we converted the class label representation by assigning the value 0 to {\em benign} and 1 to {\em malignant}.

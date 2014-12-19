@@ -6,10 +6,25 @@ M.~Alvira and R.~Rifkin.
 \newblock A.I. memo 2001-004, Center for Biological and Computational Learning,
   MIT, Cambridge, MA, 2001.
 
+\bibitem{markcraven2014}
+Mark Craven.
+\newblock Neural networks.
+\newblock {\em CS 760: Machine Learning}, 2014.
+
+\bibitem{Goh1995143}
+A.T.C. Goh.
+\newblock Back-propagation neural networks for modeling complex systems.
+\newblock {\em Artificial Intelligence in Engineering}, 9(3):143 -- 151, 1995.
+
 \bibitem{kim1997nonlinear}
 Byoung~S Kim and Anthony~J Calise.
 \newblock Nonlinear flight control using neural networks.
 \newblock {\em Journal of Guidance, Control, and Dynamics}, 20(1):26--33, 1997.
+
+\bibitem{mitchell1997artificial}
+Tom~M Mitchell.
+\newblock Artificial neural networks.
+\newblock {\em Machine learning}, pages 81--127, 1997.
 
 \bibitem{wolberg1990multisurface}
 W~Wolberg and O~Mangasarian.

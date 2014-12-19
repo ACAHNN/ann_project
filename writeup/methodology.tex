@@ -1,4 +1,26 @@
-METHODOLOGY CHECKLIST:\\
-1. Explain the data set and data set scrubbing\\
-2. Explain experimental setup and experiments run\\
-3. Explain the hypothesis and general experiment framework (how this works for any data set)
+The goal of our study is to investigate the performance and cost trade offs of a neural network.
+To this end we designed two sets of experiments to motivate and capture these trade offs.
+We want to stress the generality of the approach below ({\em i.e.,} the parameter space exploration described below could be implemented into our neural network framework).
+We motivate the approach by using the WBC data set, but a similar parameter space exploration can, and should, be done when training any neural network.
+
+\subsection{Parameter Space Exploration}
+\label{subsec:parameter}
+Our first set of experiments consists of an iterative search through the parameter space.
+We ran a search over all combinations \((i_1,...,i_h)\) of hidden units present in a network with \(h\) hidden layers.
+All \(i_k\)'s range from 0 to \(n_k\) where \(1 < k \leq h\) and \(i_1\) ranges from 1 to \(n_1\).
+In our experiment \(h=2\) and \(n=15\) for all \(h\).
+We record the predictive accuracy for each \((i_1,...,i_h)\) combination.
+Note, each combination utilized 10-fold cross validation and each fold was trained for 10 epochs.
+We then utilize the best \(i_1,...,i_h\) combination to train a network for \(e\) epochs recording the average predictive accuracy of the ten folds at each iteration.
+We set \(e=400\) in this experiment.
+The best \(i_1,...,i_h\) combination and \(e\) value were used to train and record predictive accuracy of a single neural network.
+
+\subsection{Computational Costs}
+\label{subsec:cost}
+We explore the computational costs of neural network training ({\em e.g.,} parameter space exploration) in our second set of experiments.
+To do this, we ran a similar experimental set to the set enumerated above  while recording run times of various portions.
+For the first experiment we ran the first experiment from the set described above and recorded the computational time it took to generate the predictive accuracy for \(i_1\) between 1 and \(n_1\) while holding \(i_2\) constant.
+Note, this is the equivalent of generating a row from Figure~\ref{fig:wbcd_table}.
+This was done for all values of \(i_2\) from 0 to \(n_2\).
+For the second experiment, we ran the second experiment from the set described above and recorded the computational time for each epoch from 1 to \(e\).
+
